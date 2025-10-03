@@ -1,0 +1,8 @@
+# Ignore all C++ executable files (files without extensions)
+*
+!*/
+!*.cpp
+!*.h
+!*.hpp
+!.gitignore
+!README.md
