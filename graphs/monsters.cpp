@@ -33,12 +33,15 @@ template<typename typC> ostream &operator<<(ostream &cout,const vector<typC> &a)
 void solve(){
     int n,m;
     cin>>n>>m;
-    pair<int,int> start;
-    vector<string> labyrinth(n);
-    vector<vector<int>> monsterTime(n, vector<int>(m, 1e9));
-    vector<vector<int>> playerTime(n, vector<int>(m, 1e9));
+    pair<int,int> start; // to store the initial location of the player
+
+    vector<string> labyrinth(n); // to store the grid
+
+    vector<vector<int>> monsterTime(n, vector<int>(m, 1e9)); // stores the time taken for the monsters to reach all the cells (we consider the minimum time here)
+
+    vector<vector<int>> playerTime(n, vector<int>(m, 1e9)); // stores the time taken by the player to reach every cell
     
-    queue<pair<int,int>> monsterQ, playerQ;
+    queue<pair<int,int>> monsterQ, playerQ; // to process the positions and implement the bfs algorithm
 
     for(int i=0;i<n;i++){
         cin >> labyrinth[i];
@@ -52,7 +55,7 @@ void solve(){
                 monsterQ.push({i,j});
             }
         }
-    }
+    } // we get the position of the player and also the position of all the monsters and we add this position in the monsterQ.
 
     int dirX[4] = {0,0,1,-1};
     int dirY[4] = {-1,1,0,0};
@@ -73,8 +76,8 @@ void solve(){
         }
     }
 
-    vector<vector<pair<int,int>>> parent(n, vector<pair<int,int>>(m, {-1,-1}));
-    vector<vector<char>> move_from(n, vector<char>(m, 0));
+    vector<vector<pair<int,int>>> parent(n, vector<pair<int,int>>(m, {-1,-1})); // for every cell , this stores the parent of that cell. that if we reached that cell and marked it then where did it come from
+    vector<vector<char>> move_from(n, vector<char>(m, 0)); // this is to mark the direction -> U,D,L,R
     playerQ.push(start);
 
     auto border = [&](int r, int c) {
@@ -122,9 +125,8 @@ void solve(){
 
     // Reconstruct path
     string path;
-    for(auto cur = exit; parent[cur.first][cur.second].first != -1; ){
-        path += move_from[cur.first][cur.second];
-        cur = parent[cur.first][cur.second];
+    for(auto cur = exit; parent[cur.first][cur.second].first != -1; cur = parent[cur.first][cur.second]){
+        path += move_from[cur.first][cur.second]; 
     }
     reverse(path.begin(), path.end());
 
