@@ -27,7 +27,3 @@ int main(){
     cout<<ans<<endl;
     return 0;
 }
-
-// 2,3,7,9
-// 2,3,7 ans=1
-// 
