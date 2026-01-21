@@ -1,9 +1,13 @@
-# Ignore all C++ executable files (files without extensions)
-*
-!*/
-!*.cpp
-!*.h
-!*.hpp
-!.gitignore
-!README.md
+# macOS
 .DS_Store
+
+# Compiled binaries
+a.out
+*.out
+*.exe
+
+# Local test inputs
+input.txt
+*.in
+*.txt
+cses/graphs/
